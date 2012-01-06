@@ -48,7 +48,7 @@ class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
 	if (movieRating < 6)
 		say "Du solltest " + movieTitle + " dir nicht antun. Er hat nur " + movieRatingString + " Sterne."
 	elsif (movieRating < 8)
-		say "Ich kann dir " + movieTitle + "empfehlen! Der Film hat " + movieRatingString + " Sterne."
+		say "Ich kann dir " + movieTitle + " empfehlen! Der Film hat " + movieRatingString + " Sterne."
 	elsif (movieRating >= 8)
 		say "" + movieTitle + " ist ein Kultfilm! Er hat ganze " + movieRatingString + " Sterne!"
 	end
