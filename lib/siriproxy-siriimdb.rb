@@ -83,7 +83,7 @@ class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
 	request_completed
   end
   
-  listen_for /wer war der regiseur von (.+)/i do |movieTitle|
+  listen_for /wer war der regiseur von (.*)/i do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	search = Imdb::Search.new(movieTitle)
 	movie = search.movies[0]
