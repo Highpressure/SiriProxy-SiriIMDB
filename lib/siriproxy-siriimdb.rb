@@ -32,81 +32,72 @@ class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
 	return movieRating
   end
 
-  listen_for /how many stars did (.*) get/i do |movieTitle|
+  listen_for /wieviele sterne hat (.*) bekommen/i do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	#Search for the movie and get the rating as a string
 	movieRating = getRating (movieTitle)
 	movieRatingString = movieRating.to_s
-	say "" + movieTitle + " has a rating of " + movieRatingString + " stars out of 10."
+	say "" + movieTitle + " hat eine Bewertung von " + movieRatingString + " Sternen."
     request_completed
   end
   
-  listen_for /should i see (.*)/i do |movieTitle|
+  listen_for /wie ist der film (.*)/i do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	movieRating = getRating(movieTitle)
 	movieRatingString = movieRating.to_s
 	if (movieRating < 6)
-		say "You probably shouldn't see " + movieTitle + ", it only got " + movieRatingString + " stars."
+		say "Du solltest " + movieTitle + " dir nicht antun. Er hat nur " + movieRatingString + " Sterne."
 	elsif (movieRating < 8)
-		say "I'd recommend seeing " + movieTitle + ", it got " + movieRatingString + " stars."
+		say "Ich kann dir " + movieTitle + "empfehlen! Der Film hat " + movieRatingString + " Sterne."
 	elsif (movieRating >= 8)
-		say "" + movieTitle + " is a must-see.  It got " + movieRatingString + " stars."
+		say "" + movieTitle + " ist ein Kultfilm! Er hat ganze " + movieRatingString + " Sterne!"
 	end
     request_completed
   end
 
- listen_for /who was in (.*)/i  do |movieTitle|
+ listen_for /wer hat in (.*) mit gespielt/i  do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	movieActors = getActors(movieTitle)
-	say "" + movieActors[0] + ", " + movieActors[1] + ", and " + movieActors[2] + " were in " + movieTitle + "."
+	say "" + movieActors[0] + ", " + movieActors[1] + ", und " + movieActors[2] + " haben in " + movieTitle + " mit gespielt."
     request_completed
   end
 
- listen_for (/who's in (.*)/i)  do |movieTitle|
+ listen_for /wer war in (.*) zu sehen/i do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	movieActors = getActors(movieTitle)
-	say "" + movieActors[0] + ", " + movieActors[1] + ", and " + movieActors[2] + " were in " + movieTitle + "."
+	say "" + movieActors[0] + ", " + movieActors[1] + ", und " + movieActors[2] + " haben in " + movieTitle + " mit gespielt."
     request_completed
   end  
   
-  listen_for /who is in (.*)/i  do |movieTitle|
+  listen_for /welche schauspieler spielen bei (.*) mit/i  do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	movieActors = getActors(movieTitle)
-	say "" + movieActors[0] + ", " + movieActors[1] + ", and " + movieActors[2] + " were in " + movieTitle + "."
+	say "" + movieActors[0] + ", " + movieActors[1] + ", und " + movieActors[2] + " haben in " + movieTitle + " mit gespielt."
     request_completed
   end
   
-  listen_for /Who is the lead actor in (.*)/i do |movieTitle|
+  listen_for /wer war hauptdarsteller in (.*)/i do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	movieActor = getLeadActor(movieTitle)
-	say "The main actor in " + movieTitle + " is " + movieActor + "."
+	say "Der Hauptdarsteller in " + movieTitle + " ist " + movieActor + "."
 	request_completed
   end
   
-  listen_for (/Who's the main actor in (.*)/i) do |movieTitle|
-	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
-	search = Imdb::Search.new(movieTitle)
-	movie = search.movies[0]
-	movieActor = movie.cast_members.first
-	say "The main actor in " + movieTitle + " is " + movieActor + "."
-	request_completed
-  end
-  
-  listen_for /Who directed (.+)/i do |movieTitle|
+  listen_for /wer war der regiseur von (.+)/i do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	search = Imdb::Search.new(movieTitle)
 	movie = search.movies[0]
 	movieDirectors = movie.director()
-	say "The director of " + movieTitle + " is " + movieDirectors[0] + "."
+	say "Der Regiseur von " + movieTitle + " ist " + movieDirectors[0] + "."
 	request_completed
   end
   
-  listen_for /When was (.*) released/i do |movieTitle|
+  listen_for /wann wurde (.*) released/i do |movieTitle|
 	movieTitle = movieTitle.split(' ').map {|w| w.capitalize }.join(' ')
 	search = Imdb::Search.new(movieTitle)
 	movie = search.movies[0]
 	movieDate = movie.release_date()
-	say "" + movieTitle + " was released on " + movieDate + "."
+	say "" + movieTitle + " wurde am " + movieDate + " veröffentlicht."
 	request_completed
   end
 end
