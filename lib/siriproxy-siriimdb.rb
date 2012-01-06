@@ -97,7 +97,7 @@ class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
 	search = Imdb::Search.new(movieTitle)
 	movie = search.movies[0]
 	movieDate = movie.release_date()
-	say "" + movieTitle + " wurde am " + movieDate + " veröffentlicht."
+	say "" + movieTitle + " wurde am " + movieDate + " released."
 	request_completed
   end
 end
