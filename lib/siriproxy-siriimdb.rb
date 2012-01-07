@@ -99,5 +99,9 @@ class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
 	movieDate = movie.release_date()
 	say "" + movieTitle + " wurde am " + movieDate + " released."
 	request_completed
+	
+  listen_for /was schaust so deppert(.*)/i do |movieTitle|
+	say "Du kannst von mir so ah Watschn habn, dast dich anscheisst und anbrunzt gemeinsam, gschissana!" + movieDate + " released."
+	request_completed
   end
 end
