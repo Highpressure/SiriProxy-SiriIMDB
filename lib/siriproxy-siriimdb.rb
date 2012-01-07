@@ -101,7 +101,7 @@ class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
 	request_completed
 	
   listen_for /was schaust so deppert(.*)/i do |movieTitle|
-	say "Du kannst von mir so ah Watschn habn, dast dich anscheisst und anbrunzt gemeinsam, gschissana!" + movieDate + " released."
+	say "Du kannst von mir so ah Watschn habn, dast dich anscheisst und anbrunzt gemeinsam, gschissana!" 
 	request_completed
   end
 end
